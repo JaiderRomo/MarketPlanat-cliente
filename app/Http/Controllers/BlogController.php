@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Blog;
 use App\Models\User;
+use Illuminate\Support\Facades\Http;
 use App\Models\Image;
+
 class BlogController extends Controller
 {
     /**
@@ -15,9 +17,16 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blog = Blog::all();
-        return view('blog.index',compact('blog'));
-    
+
+
+        $blogs = Http::get('http://api.marketplant.v1/v1/blogs');
+        
+        $blogArray = $blogs->json();
+
+        return view('blog.index', compact('blogArray'));
+        // $blog = Blog::all();
+        // return view('blog.index',compact('blog'));
+
     }
 
     /**
@@ -38,38 +47,14 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-      
 
-        $blog  = new Blog();
-        //    $User = user::all();
-    
-         $usuario = auth()->user()->id;
-       
-         $file=$request->file("imagen_blog");
-         $nombreArchivo = "img_".time().".".$file->guessExtension();
-         $request->file('imagen_blog')->storeAs('public/images', $nombreArchivo );
-         $temp = $blog->create(['titulo'=>$request->titulo,'descripcion'=>$request->descripcion, 'user_id'=>$usuario])->images()->create(['url'=>$nombreArchivo]);
-        
-          //   $blog->imagen_blog = $nombreArchivo;
-        //    $blog->descripcion = $request->descripcion;
-        
-           return redirect()->route('blog.index');
-    //    $blog  = new Blog();
-    //    $User = user::all();
-    //    foreach ($User as $user)
-    //    if (auth()->user()->id==$user->id) {
-    //    $blog->user_id= $user->id;
-    //   };
-      
-    //   $file=$request->file("imagen_blog");
-    //   $nombreArchivo = "img_".time().".".$file->guessExtension();
-    //   $request->file('imagen_blog')->storeAs('public/blogs', $nombreArchivo );
-    //   $blog->imagen_blog = $nombreArchivo;
 
-    //    $blog->titulo = $request->titulo;
-    //    $blog->descripcion = $request->descripcion;
-    //    $blog->save();
-    //    return redirect()->route('blog.index');
+        Http::post('http://api.marketplant.v1/v1/blogs', $request->all());
+      
+       // return $request;
+         return redirect()->Route('blog.index');
+
+
     }
 
     /**
@@ -80,8 +65,8 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        $blogs= Blog::find($id);
-        return view('blog.show',compact('blogs'));
+        $blogs = Blog::find($id);
+        return view('blog.show', compact('blogs'));
     }
 
     /**
@@ -105,26 +90,26 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-             
 
-    $blogs = Blog::findOrFail($id);
-    $blogs->nombre =$request->nombre;
-    $blogs->descripcion= $request->descripcion;
 
-    $file=$request->file("imagen");
-    $nombreArchivo = "img_".time().".".$file->guessExtension();
-    $request->file('imagen')->storeAs('public/productos', $nombreArchivo );
-    $blogs->imagen = $nombreArchivo;
-    
-    $blogs->cantidad= $request->cantidad;
-    $blogs-> precio= $request-> precio;
-    $blogs-> cantidad= $request-> cantidad;
-    
-    
-    $blogs->user_id= auth()->user()->id;
+        $blogs = Blog::findOrFail($id);
+        $blogs->nombre = $request->nombre;
+        $blogs->descripcion = $request->descripcion;
 
-    $blogs->save();
-    return redirect()->Route('perfil_us.index');
+        $file = $request->file("imagen");
+        $nombreArchivo = "img_" . time() . "." . $file->guessExtension();
+        $request->file('imagen')->storeAs('public/images', $nombreArchivo);
+        $blogs->imagen = $nombreArchivo;
+
+        $blogs->cantidad = $request->cantidad;
+        $blogs->precio = $request->precio;
+        $blogs->cantidad = $request->cantidad;
+
+
+        $blogs->user_id = auth()->user()->id;
+
+        $blogs->save();
+        return redirect()->Route('perfil_us.index');
     }
 
     /**

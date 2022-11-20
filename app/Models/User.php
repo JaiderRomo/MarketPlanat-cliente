@@ -23,6 +23,7 @@ class User extends Authenticatable
         'tipo_identificaciones_id',
         'password',
         'identificacion',
+        'telefono',
         'email',
         'rol',
     ];

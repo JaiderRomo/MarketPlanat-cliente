@@ -1,39 +1,36 @@
 @extends('layouts.app')
-<br>
-<br>
-<br>
-<br>
+<br><br><br><br>
 
 <div class="text-dark text-center  h3">EDITA TU PRODUCTO</div>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
            
-            <form action="{{ route('perfil_us.update',$product->id) }}" method="POST" enctype="multipart/form-data"> 
+            <form action="{{ route('perfil_us.update',$product['id']) }}" method="POST" enctype="multipart/form-data"> 
             @csrf
             @method('PUT')
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
                 <div class="grid grid-cols-1">
                     <label class="uppercase md:text-sm text-xs text-dark text-light font-semibold">Nombre:</label>
-                    <input name="nombre"value="{{ $product->nombre }}" class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" required/>
+                    <input name="nombre"value="{{ $product['nombre'] }}" class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" required/>
                 </div>
                 <div class="grid grid-cols-1">
                     <label class="uppercase md:text-sm text-xs text-dark text-light font-semibold">Descripción:</label>
-                    <input name="descripcion" value="{{ $product->descripcion }}" class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" required/>
+                    <input name="descripcion" value="{{ $product['descripcion'] }}" class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" required/>
                 </div>
                 <div  class="grid grid-cols-1">
                     <label class="uppercase md:text-sm text-xs text-dark text-light font-semibold">Precio:</label>
-                    <input name="precio"value="{{ $product->precio }}" class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" required/></div>
+                    <input name="precio"value="{{ $product['precio'] }}" class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" required/></div>
                 <div>
                     <div class="grid grid-cols-1">
                     <label class="uppercase md:text-sm text-xs text-dark text-light font-semibold">Cantidad:</label>
-                    <input name="cantidad" value="{{ $product->cantidad }}" class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" required/></div></div>
+                    <input name="cantidad" value="{{ $product['cantidad'] }}" class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" required/></div></div>
                 </div>
                 
          
 
                 <div class="grid grid-cols-1 mt-5 mx-7">
-                    <img src="{{ 'http://localhost/marketplant/public/storage/productos/' . $product->imagen }}" width="200px" id="imagenSeleccionada">
+                    <img src="{{ 'http://localhostAPI./marketplant.V1/public/storage/productos/' . $product['imagen'] }}" width="200px" id="imagenSeleccionada">
                 </div>                                    
                 
                 <div class="grid grid-cols-1 mt-5 mx-7">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Models\categoria;
 use Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
@@ -18,9 +19,11 @@ class SemillasController extends Controller
     {
       
      
+        $pro= Http::get('http://api.marketplant.v1/v1/semillas');
+        $proArray = $pro->json();
        
-        $semilla = Product::all();
-        return view('semillas.index',compact('semilla'));
+        //$semilla = Product::all();
+        return view('semillas.index',compact('proArray'));
     }
 
     /**
@@ -43,28 +46,29 @@ class SemillasController extends Controller
     public function store(Request $request)
     {
 
-        $semilla  = new Product();
+        // $semilla  = new Product();
 
-        $file=$request->file("imagen");
-        $nombreArchivo = "img_".time().".".$file->guessExtension();
-        $request->file('imagen')->storeAs('public/productos', $nombreArchivo );
-        $semilla->imagen = $nombreArchivo;
+        // $file=$request->file("imagen");
+        // $nombreArchivo = "img_".time().".".$file->guessExtension();
+        // $request->file('imagen')->storeAs('public/productos', $nombreArchivo );
+        // $semilla->imagen = $nombreArchivo;
        
-        $User = user::all();
-        foreach ($User as $user)
-        if (auth()->user()->id==$user->id) {
-        $semilla->user_id= $user->id;
-        };
+        // $User = user::all();
+        // foreach ($User as $user)
+        // if (auth()->user()->id==$user->id) {
+        // $semilla->user_id= $user->id;
+        // };
        
-        $semilla->nombre = $request->nombre;
-        $semilla->descripcion = $request->descripcion;
-        $semilla->cuidados = $request->cuidados; 
-        $semilla->tiempo_germinacion = $request->tiempo_germinacion;
-        $semilla->categoria_id = $request->categoria_id="3";
-        $semilla->cantidad = $request->cantidad;   
-        $semilla->precio = $request->precio;
-        $semilla->ubicacion = $request->ubicacion;
-        $semilla->save();
+        // $semilla->nombre = $request->nombre;
+        // $semilla->descripcion = $request->descripcion;
+        // $semilla->cuidados = $request->cuidados; 
+        // $semilla->tiempo_germinacion = $request->tiempo_germinacion;
+        // $semilla->categoria_id = $request->categoria_id="3";
+        // $semilla->cantidad = $request->cantidad;   
+        // $semilla->precio = $request->precio;
+        // $semilla->ubicacion = $request->ubicacion;
+        // $semilla->save();
+      
         return redirect()->route('semillas.index');
     }
 
@@ -76,7 +80,9 @@ class SemillasController extends Controller
      */
     public function show($id)
     {
-        $semilla = Product::find($id);
+        $pro= Http::get('http://api.marketplant.v1/v1/semillas/'. $id);
+        $semilla = $pro->json();
+        // $semilla = Product::find($id);
         return view('semillas.show',compact('semilla'));
     }
 

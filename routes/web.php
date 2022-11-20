@@ -68,10 +68,12 @@ Route::get('/login', [SesionController::class, 'create'])
 Route::post('/login', [SesionController::class, 'store'])
     ->name('login.store');
 
+    Route::post('/logout', [SesionController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('login.destroy');
     Route::get('/logout', [SesionController::class, 'destroy'])
     ->middleware('auth')
     ->name('login.destroy');
-
 
     Route::get('/admin', [AdminController::class, 'index'])
     ->middleware('auth.admin')

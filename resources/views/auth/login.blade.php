@@ -1,14 +1,12 @@
 @extends('layouts.app')
-<br>
-<br>
-<br>
+
 
 @section('title', 'Login')
 
 @section('content')
 
 
-@endsection
+
 <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 <header>
 
@@ -51,7 +49,7 @@
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
                         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                         <script src="{{asset ('js/script.js')}}" ></script>
-                        <button onclick="swal1()" type="submit"
+                        <button type="submit"
                             class="rounded-md bg-indigo-500 w-full text-lg
             text-white font-semibold p-2 my-3 hover:bg-indigo-600">INGRESAR</button>
 
@@ -66,3 +64,4 @@
         </div>
     </div>
 </header> 
+@endsection

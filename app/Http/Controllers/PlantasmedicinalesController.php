@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\plantamedicinal;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 USE App\Models\Product;
 use App\Models\User;
@@ -15,8 +16,12 @@ class PlantasmedicinalesController extends Controller
      */
     public function index()
     {
-        $medicinal = Product::all();
-      return view('plantasmedicinales.index',compact('medicinal'))  ;
+
+        $pro= Http::get('http://api.marketplant.v1/v1/medicinales');
+        $proArray = $pro->json();
+
+       // $medicinal = Product::all();
+      return view('plantasmedicinales.index',compact('proArray'))  ;
     }
 
     /**
@@ -73,8 +78,14 @@ class PlantasmedicinalesController extends Controller
      */
     public function show($id)
     {
-        $medicinales = Product::find($id);
-    return view('plantasmedicinales.show',compact('medicinales'));
+        $pro= Http::get('http://api.marketplant.v1/v1/medicinales/'. $id);
+        $medicinales = $pro->json();
+            // $producto = Product::find($id);
+            // $user= User::all();
+        //    return view('product.show',compact('producto'));
+
+    //     $medicinales = Product::find($id);
+     return view('plantasmedicinales.show',compact('medicinales'));
     }
 
     /**

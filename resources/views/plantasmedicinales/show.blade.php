@@ -13,7 +13,7 @@
 <section class="jumbotron text-center">
     <div class="container">
         <br>
-        <h1 class="jumbotron-heading h3"> {{$medicinales->nombre}}</h1>
+        <h1 class="jumbotron-heading h3"> {{$medicinales['nombre']}}</h1>
      </div>
      
 </section>
@@ -31,7 +31,7 @@
             <div class="card bg-light mb-3">
                 <div class="card-body">
                     <a href="" data-toggle="modal" data-target="#productModal">
-                        <img class="img-fluid" src="{{'http://localhost/marketplant/public/storage/productos/'.$medicinales->imagen }}" />
+                        <img class="img-fluid" src="{{'http://localhost/api.marketplant.v1/public/storage/productos/'.$medicinales['imagen'] }}" />
                         
                     </a>
                 </div>
@@ -42,30 +42,31 @@
         <div class="col-12 col-lg-6 add_to_cart_block">
             <div class="card bg-light mb-3">
                 <div class="card-body">
-                    <p class="price">Precio: ${{$medicinales->precio}}</p>
+                    <p class="price">Precio: ${{$medicinales['precio']}}</p>
                     <form action="{{ route('cart.store') }}" method="POST">
                         {{ csrf_field() }}
                     {{-- <form method="get" action="cart.html"> --}}
                         <div class="form-group"> 
-                            <input type="hidden" value="{{ $medicinales->id }}" id="id" name="id">
-                            <input type="hidden" value="{{ $medicinales->nombre }}" id="name" name="name">
-                            <input type="hidden" value="{{ $medicinales->precio }}" id="price" name="price">
+                            <input type="hidden" value="{{ $medicinales['id'] }}" id="id" name="id">
+                            <input type="hidden" value="{{ $medicinales['nombre'] }}" id="name" name="name">
+                            <input type="hidden" value="{{ $medicinales['precio'] }}" id="price" name="price">
                             <input type="hidden" value="1" id="quantity" name="quantity">
                         </div>
                         <div class="form-group">
-                            <label>Unidades Disponibles:    {{$medicinales->cantidad}}</label>
+                            <label>Unidades Disponibles:    {{$medicinales['cantidad']}}</label>
                     
                         </div>
                         <button class=" btn btn-success btn-lg btn-block text-uppercase  " title="add to cart">
                             <i class="fa fa-shopping-cart"></i>  agregar al carrito
                         </button>
+                        <br>
                     </form>
                     <div class="product_rassurance">
                         <ul class="list-inline">
                             <li class="list-inline-item"><i class="fa fa-truck fa-2x"></i><br/>Rapido Envio</li>
                             <li class="list-inline-item"><i class="fa fa-credit-card fa-2x"></i><br/>Pago Seguro</li>
                             <li class="list-inline-item"><i class="fa fa-phone fa-2x"></i><br/>+57 310 520 7734</li>
-                            <li class="list-inline-item"><i class="fa fa-map-marker fa-2x"></i><br/>{{$medicinales->ubicacion}}</li>
+                            <li class="list-inline-item"><i class="fa fa-map-marker fa-2x"></i><br/>{{$medicinales['ubicacion']}}</li>
                         </ul>
                     </div>
                 </div>
@@ -80,26 +81,26 @@
                 <div class="card-header bg-dark text-white text-uppercase"><i class="fa fa-check"></i>  Descripcion</div>
                 <div class="card-body">
                     <p class="card-text">
-                   {{$medicinales->descripcion}}
+                   {{$medicinales['descripcion']}}
                     </p>
                    </div>
                    
                     <div class="card-header bg-dark text-white text-uppercase"><i class="fa fa-check"></i>  Usos</div>
                     <div class="card-body">
                         <p class="card-text">
-                       {{$medicinales->usos}}
+                       {{$medicinales['usos']}}
                         </p>
                 </div>
                 <div class="card-header bg-dark text-white text-uppercase"><i class="fa fa-check"></i>  Beneficios</div>
                 <div class="card-body">
                     <p class="card-text">
-                   {{$medicinales->beneficios}}
+                   {{$medicinales['beneficios']}}
                     </p>
                    </div>
                    <div class="card-header bg-dark text-white text-uppercase"><i class="fa fa-check" ></i>  Preparaciones</div>
                    <div class="card-body">
                        <p class="card-text">
-                      {{$medicinales->preparacion}}
+                      {{$medicinales['preparacion']}}
                        </p>
                       </div>
             </div>

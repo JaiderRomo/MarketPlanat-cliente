@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Product;
+use Illuminate\Support\Facades\Http;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,11 @@ class PlantasornamentalesController extends Controller
      */
     public function index()
     {
-        $ornamental = Product::all();
-        return view('plantasornamentales.index',compact('ornamental'));
+
+        $pro= Http::get('http://api.marketplant.v1/v1/ornamentales');
+        $proArray = $pro->json();
+      //  $ornamental = Product::all();
+        return view('plantasornamentales.index',compact('proArray'));
     }
 
     /**
@@ -72,7 +76,9 @@ class PlantasornamentalesController extends Controller
      */
     public function show($id)
     {
-        $ornamental = Product::find($id);
+        $pro= Http::get('http://api.marketplant.v1/v1/ornamentales/'. $id);
+        $ornamental = $pro->json();
+       // $ornamental = Product::find($id);
         return view('plantasornamentales.show',compact('ornamental'));
     }
 

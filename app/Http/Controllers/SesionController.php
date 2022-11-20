@@ -16,7 +16,7 @@ class SesionController extends Controller
         if(auth()->attempt(request(['email', 'password'])) == false) {
             return back()->withErrors([
                 'message' => 'El correo o contraseña es incorrecto, por favor intente de nuevo',
-            ]);
+             ]);
 
         } else {
 

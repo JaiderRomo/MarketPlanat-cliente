@@ -1,4 +1,4 @@
-<!-- Footer -->
+{{-- <!-- Footer -->
 <footer class="text-center text-lg-start bg-dark text-muted">
    
    
@@ -47,7 +47,13 @@
             
           
             </h6>
-            <img src="{{asset('imagen/logo.png')}}"  width="130" height="110">
+            <img src="{{asset('imagen/logo.png')}}"  width="130" height="110" class="logoo">
+            <style>
+
+
+
+            </style>
+
            
           </div>
           <!-- Grid column -->
@@ -122,4 +128,249 @@
     </div>
     <!-- Copyright -->
   </footer>
-  <!-- Footer -->
+  <!-- Footer --> --}}
+<footer>
+    <div class="container">
+        <div class="content">
+            ⁡⁢⁣⁣ ⁡
+            <div class="col">
+                <p>MarketPlant</p>
+                <img src="{{asset('imagen/logo.png')}}"  width="130" height="110" class="logoo">
+                <p>
+                    Somos un intermediario para que los pequeños y grandes
+                    comerciantes den a conocer su producto por medio de MarketPlant
+                </p>
+                <div class="flex">
+                    <div class="col-info">
+                        {{-- <p>
+                            PHONE NUMBER <br />
+                            <span>+1 (800) 060-07-30</span>
+                        </p> --}}
+
+                    </div>
+                    <div class="col-info">
+                        {{-- <p>
+                            EMAIL ADDRESS <br />
+                            <span>us@example.com</span>
+                        </p> --}}
+
+                 
+
+                    </div>
+                </div>
+            </div>
+            ⁡⁢⁣⁡⁢⁣⁣ ⁡
+            <div class="col">
+                <div class="column">
+                    <p>Mision</p>
+                    <p>Ofrecer el mejor</p>
+                    <p>servicio a los </p>
+                    <p>usuarios y emprendedores</p>
+                    <p>que hagan uso</p>
+                    <p>de nuestro aplicativo</p>
+                    
+                </div>
+            </div>
+            <div class="col">
+                <div class="column">
+                    <p>Vision</p>
+                    <p>Ser reconocidos</p>
+                    <p>como el mejor</p>
+                    <p>aplicativo web</p>
+                    <p>en venta de productos</p>
+                    <p>naturales</p>
+                   
+                </div>
+            </div>
+            ⁡⁢⁣⁣ ⁡
+            <div class="col">
+              
+                <p>Contactanos</p>
+                <p>
+                    Si nesecitas ayuda o tienes alguna duda puedes<br />
+                    enviarnos un correo.
+                </p>
+                <div class="email">
+                    <input type="email" placeholder="user@example.com" />
+                    <button>Enviar</button>
+                </div>
+                <p>Siguenos en nuestras redes sociales:</p>
+                <div class="social">
+                    <img src="https://i.postimg.cc/44pPB9wk/facebook.png" alt="" />
+                    <img src="https://i.postimg.cc/L8Q3nB4f/twitter.png" alt="" />
+                    <img src="https://i.postimg.cc/TYG9S3Hy/instagram.png" alt="" />
+                    <img src="https://i.postimg.cc/kGCxkTwr/youtube.png" alt="" />
+                    <img src="https://i.postimg.cc/CKZHDBd2/telegram.png" alt="" />
+                </div>
+            </div>
+            ⁡⁢⁡⁢⁣⁣
+        </div>
+    </div>
+    <div class="content-foot">
+        <div class="container">
+            <div class="foot-text">
+                <p>MarketPlant <span></span> <span></span></p>
+                <div class="pay">
+                    <img src="https://i.postimg.cc/PrtWyFPY/visa-logo-png-2013.png" alt="" />
+                    <img src="https://i.postimg.cc/R0j1TSHZ/mastercard-PNG23.png" alt="" />
+                    <img src="https://i.postimg.cc/sggJj0zs/paypal-logo-png-2119.png" alt="" />
+                    <img src="https://i.postimg.cc/hjdsFzBm/American-Express-logo-PNG14.png" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- Credit to https://bootsnipp.com/snippets/ooa9M -->
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0%;
+        padding: 0%;
+    }
+
+
+
+    footer {
+        background-color: rgb(58, 58, 58);
+        margin-top: 0px;
+    }
+
+   
+
+    .container .content {
+        display: flex;
+        padding: 50px;
+        justify-content: space-between;
+    }
+
+    .container .content .col {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container .content p:first-child:not(.flex p:first-child) {
+        color: white;
+        font-size: 22px;
+    }
+
+    .container .content p:not(.col, .column p:first-child) {
+        color: rgb(136, 136, 136);
+        margin-bottom: 10px;
+    }
+
+    .container .content .col:first-child {
+        gap: 25px;
+    }
+
+    .container .content .col:first-child .flex {
+        display: flex;
+        gap: 50px;
+    }
+
+    .container .content .col:first-child .flex .col-info {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .container .content .col:first-child .flex .col-info p {
+        font-size: 14px;
+    }
+
+    .container .content .col:first-child .flex .col-info span {
+        color: white;
+        font-size: 17px;
+    }
+
+    .container .content .col .column:first-child {
+        margin-right: 50px;
+    }
+
+    .container .content .col .column p:first-child {
+        margin-bottom: 25px;
+    }
+
+    .container .content .col .column p:not(p:first-child) {
+        margin-bottom: 12px;
+    }
+
+    .container .content .col:last-child {
+        gap: 15px;
+    }
+
+    .container .content .col:last-child .email {
+        display: flex;
+    }
+
+    .container .content .col:last-child .email input {
+        width: 300px;
+        height: 40px;
+        font-size: 17px;
+        color: white;
+        background-color: rgb(76, 76, 76);
+        padding-left: 10px;
+        border: 0;
+        outline: 0;
+    }
+
+    .container .content .col:last-child .email button {
+        width: 200px;
+        height: 40px;
+        color: white;
+        background-color: rgb(229, 39, 39);
+        padding-left: 10px;
+        border: 0;
+        outline: 0;
+        text-align: center;
+        margin-left: -30px;
+        font-weight: bold;
+        font-size: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 3px;
+    }
+
+    .container .content .col:last-child .social {
+        display: flex;
+        gap: 20px;
+    }
+
+    .container .content .col:last-child .social img {
+        width: 40px;
+    }
+
+    .content-foot {
+        background-color: rgb(43, 43, 43);
+    }
+
+    .content-foot .foot-text {
+        padding: 25px 80px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .content-foot .container p {
+        color: rgb(136, 136, 136);
+    }
+
+    .content-foot .container p span {
+        color: white;
+        font-weight: bold;
+    }
+
+    .content-foot .container .pay {
+        display: flex;
+        gap: 20px;
+    }
+
+    .content-foot .container .pay img {
+        width: 70px;
+        height: 40px;
+        object-fit: contain;
+        background-color: white;
+        padding: 10px 5px;
+    }
+</style>

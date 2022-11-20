@@ -3,7 +3,7 @@
         <li class="list-group-item">
             <div class="row">
                 <div class="col-lg-3">
-                    <img src="{{'http://localhost/marketplant/public/storage/productos/'. $item->attributes->imagen }}"
+                    <img src="{{'http://localhost/api.marketplant.v1/public/storage/productos/'. $item->attributes['imagen'] }}"
                          style="width: 50px; height: 50px;"
                     >
                 </div>
@@ -14,7 +14,7 @@
                 <div class="col-lg-3">
                     <p>${{ \Cart::get($item->id)->getPriceSum() }}</p>
                 </div>
-                <hr>
+                
             </div>
         </li>
     @endforeach

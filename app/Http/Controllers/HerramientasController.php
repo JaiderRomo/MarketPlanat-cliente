@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 
 class HerramientasController extends Controller
@@ -14,8 +15,13 @@ class HerramientasController extends Controller
      */
     public function index()
     {
-        $herramienta = Product::all();
-        return view ('herramientas.index', compact('herramienta'));
+
+        
+        $pro= Http::get('http://api.marketplant.v1/v1/herramientas');
+        $proArray = $pro->json();
+
+      //  $herramienta = Product::all();
+        return view ('herramientas.index', compact('proArray'));
     }
 
     /**
@@ -68,7 +74,9 @@ class HerramientasController extends Controller
      */
     public function show($id)
     {
-        $herramienta = Product::find($id);
+        $pro= Http::get('http://api.marketplant.v1/v1/herramientas/'. $id);
+        $herramienta = $pro->json();
+       // $herramienta = Product::find($id);
         return view('herramientas.show',compact('herramienta'));
     }
 

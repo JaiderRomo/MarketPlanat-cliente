@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Http;
 class AdminController extends Controller
 {
     /**
@@ -13,8 +13,11 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $user = User::all();
-    return view ('admin.index',compact('user'));
+        $users= Http::get('http://api.marketplant.v1/v1/users');
+        $userArray = $users->json();
+        return view('admin.index', compact('userArray'));
+    //     $user = User::all();
+    // return view ('admin.index',compact('user'));
     }
 
     /**
@@ -89,8 +92,9 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        $user=User::findOrFail($id);
-        $user->delete();
+        Http::delete('http://api.marketplant.v1/v1/users/'.$id);
+        // $user=User::findOrFail($id);
+        // $user->delete();
         return redirect()->route('admin.index');
     
     }

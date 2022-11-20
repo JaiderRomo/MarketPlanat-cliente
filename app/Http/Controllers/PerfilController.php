@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use Illuminate\Support\Facades\Http;
 use App\Models\Blog;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -13,13 +14,25 @@ class PerfilController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+  
+     public function listarBlogs(Request $request){
+        
+        $blogs = Http::get('http://api.marketplant.v1/v1/blogs');
+        
+        $blogArray = $blogs->json();
+
+        return view('perfil_us.listarBlogs', compact('blogArray'));
+     }
+
     public function index(Request $request)
     {
-        $buscarpor = $request->get('buscarpor');
+        $pro= Http::get('http://api.marketplant.v1/v1/productos');
+        $productos = $pro->json();
+
+       
         // $blogs = Blog::all();
-        // $producto = Product::all();
-        $producto = Product::where('nombre','LIKE','%',$buscarpor.'%');
-        return view('perfil_us.index')->withTitle('MarketPlant | PERFIL')->with(['producto' => $producto,'busqueda'=>$buscarpor]);
+       //  $productos = Product::all();
+        return view('perfil_us.index')->withTitle('MarketPlant | PERFIL')->with(['productos' => $productos]);
     }
 
     /**
@@ -62,9 +75,12 @@ class PerfilController extends Controller
      */
     public function edit( $id)
     {
-     
-        $product = Product::findOrFail($id);
-        return view('perfil_us.edit', compact('product'));
+        $prod= Http::get('http://api.marketplant.v1/v1/productos/'.$id);
+        $product = $prod->json();
+
+       // $product = Product::findOrFail($id);
+       return view('perfil_us.edit')->withTitle('MarketPlant | PERFIL')->with(['product' => $product]);
+     //   return view('perfil_us.edit', compact('product'));
     }
 
     /**
@@ -77,25 +93,8 @@ class PerfilController extends Controller
     public function update(Request $request, $id)
     {
     
-        
-
-    $product = Product::findOrFail($id);
-    $product->nombre =$request->nombre;
-    $product->descripcion= $request->descripcion;
-
-    $file=$request->file("imagen");
-    $nombreArchivo = "img_".time().".".$file->guessExtension();
-    $request->file('imagen')->storeAs('public/productos', $nombreArchivo );
-    $product->imagen = $nombreArchivo;
-
-    $product->cantidad= $request->cantidad;
-    $product-> precio= $request-> precio;
-    $product-> cantidad= $request-> cantidad;
+        Http::put('http://api.marketplant.v1/v1/productos'.$id,$request->all());
     
-    
-    $product->user_id= auth()->user()->id;
-
-    $product->save();
     return redirect()->Route('perfil_us.index');
     
     }
@@ -108,9 +107,11 @@ class PerfilController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::findOrFail($id);
-        $product->delete();
-
-        return redirect()->Route('perfil_us.index', $product);
+        // $product = Product::findOrFail($id);
+        // $product->delete();
+        Http::delete('http://api.marketplant.v1/v1/productos/'.$id);
+        // $user=User::findOrFail($id);
+        // $user->delete();
+        return redirect()->Route('perfil_us.index');
     }
 }

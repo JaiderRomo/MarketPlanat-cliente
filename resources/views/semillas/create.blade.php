@@ -1,12 +1,16 @@
 @extends('layouts.app')
 
+
+@section('title', 'Productos')
+
+@section('content')
 <br>
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
             <br>
             <div class="text-dark text-center  h3">AÑADE LA INFORMACÍON DE TU SEMILLA</div>
-            <form action="{{ Route('semillas.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ 'http://api.marketplant.v1/v1/semillas' }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
                     <div class="grid grid-cols-1">
@@ -92,7 +96,7 @@
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
                         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                         <script src="{{asset ('js/script.js')}}" ></script>
-                        <button onclick="swal4()" type="submit"
+                        <button type="submit"
                         class='w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2'>Guardar</button>
                 </div>
             </form>
@@ -119,3 +123,4 @@
         });
     });
 </script>
+@endsection

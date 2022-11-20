@@ -62,13 +62,13 @@ $preference->save();
                     <h4>{{ \Cart::getTotalQuantity()}} Producto(s) en el carrito</h4><br>
                 @else
                     <h4>No hay Producto(s) En Su Carrito</h4><br>
-                    <a href="/" class="btn btn-dark">Continue en la tienda</a>
+                    <a href="{{ route('product.index') }}" class="btn btn-dark">Continue en la tienda</a>
                 @endif
 
                 @foreach($cartCollection as $item)
                     <div class="row">
                         <div class="col-lg-3">
-                            <img src="{{'http://localhost/marketplant/public/storage/productos/' .$item->attributes->imagen }}" class="img-thumbnail" width="200" height="200">
+                            <img src="{{'http://localhost/api.marketplant.v1/public/storage/productos/' .$item->attributes->imagen }}" class="img-thumbnail" width="200" height="200">
                         </div>
                         <div class="col-lg-5">
                             <p>
@@ -86,7 +86,7 @@ $preference->save();
                                         <input type="hidden" value="{{ $item->id}}" id="id" name="id">
                                         <input type="number" class="form-control form-control-sm" value="{{ $item->quantity }}"
                                                id="quantity" name="quantity" style="width: 70px; margin-right: 10px;">
-                                        <button class="btn btn-secondary btn-sm" style="margin-right: 25px;"><i class="fa fa-edit"></i></button>
+                                        <button class="btn btn-secondary btn-sm" style="width: 80px"><i class="fa fa-edit"></i></button>
                                     </div>
                                 </form>
                                 <form action="{{ route('cart.remove') }}" method="POST">
@@ -102,6 +102,7 @@ $preference->save();
                 @if(count($cartCollection)>0)
                     <form action="{{ route('cart.clear') }}" method="POST">
                         {{ csrf_field() }}
+                        <br>
                         <button class="btn btn-secondary btn-md">Borrar Carrito</button> 
                     </form>
                 @endif
@@ -121,9 +122,55 @@ $preference->save();
                     <div class="cho-container">
                     </div>
                     <br>
-                    <a href="{{ route('shop') }}" class="btn btn-dark"  >Continuar comprando</a>
-                   
-                 
+                    <a href="{{ route('product.index') }}" class="btn btn-dark"  style="width: 500px" >Continuar comprando</a>
+                   <br>
+                   <br>
+                    <div id="smart-button-container">
+                        <div style="text-align: center;">
+                          <div id="paypal-button-container"></div>
+                        </div>
+                      </div>
+                    <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+                    <script>
+                      function initPayPalButton() {
+                        paypal.Buttons({
+                          style: {
+                            shape: 'rect',
+                            color: 'gold',
+                            layout: 'vertical',
+                            label: 'paypal',
+                            
+                          },
+                  
+                          createOrder: function(data, actions) {
+                            return actions.order.create({
+                              purchase_units: [{"amount":{"currency_code":"USD","value":1}}]
+                            });
+                          },
+                  
+                          onApprove: function(data, actions) {
+                            return actions.order.capture().then(function(orderData) {
+                              
+                              // Full available details
+                              console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                  
+                              // Show a success message within this page, e.g.
+                              const element = document.getElementById('paypal-button-container');
+                              element.innerHTML = '';
+                              element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                  
+                              // Or go to another URL:  actions.redirect('thank_you.html');
+                              
+                            });
+                          },
+                  
+                          onError: function(err) {
+                            console.log(err);
+                          }
+                        }).render('#paypal-button-container');
+                      }
+                      initPayPalButton();
+                    </script>
                     
                 </div>
             @endif
@@ -145,7 +192,7 @@ $preference->save();
           },
           render: {
             container: ".cho-container", // Indica el nombre de la clase donde se mostrará el botón de pago
-            label: "Pagar", // Cambia el texto del botón de pago (opcional)
+            label: "Pagar con Mercado Pago", // Cambia el texto del botón de pago (opcional)
           },
         });
       </script>

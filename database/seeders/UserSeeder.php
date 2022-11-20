@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
             'tipo_identificacion_id'=>'1',
             'identificacion'=> '123456789',
             'rol' => 'admin',
+            'telefono' =>'219873349',
             'email' => 'pablo@gmail.com',
             'password' => bcrypt('123456'),
          
@@ -30,6 +31,7 @@ class UserSeeder extends Seeder
             'tipo_identificacion_id'=>'2',
             'identificacion'=> '12345678',
             'rol' => 'admin',
+            'telefono' =>'219873349',
             'email' => 'paola@gmail.com',
             'password' => bcrypt('123456'),
          
@@ -40,7 +42,19 @@ class UserSeeder extends Seeder
             'tipo_identificacion_id'=>'3',
             'identificacion'=> '1234567890',
             'rol' => 'admin',
+            'telefono' =>'219873349',
             'email' => 'jaider@gmail.com',
+            'password' => bcrypt('123456'),
+         
+        ]);
+        DB::table('users')->insert([
+            'id'  => '4',
+            'name' => 'Usuario',
+            'tipo_identificacion_id'=>'2',
+            'identificacion'=> '1234567890',
+            'rol' => '',
+            'telefono' =>'219873349',
+            'email' => 'usuario@gmail.com',
             'password' => bcrypt('123456'),
          
         ]);
